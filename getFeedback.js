@@ -39,7 +39,7 @@ export function getFeedback(guessWord, correctWord) {
 //Om ja --> returnerar misplaced
 //Om nej --> returnerar incorrect
 
-function checkLetter(letter, correctLetters) {
+export function checkLetter(letter, correctLetters) {
   const foundIndex = correctLetters.indexOf(letter);
 
   if (foundIndex !== -1) {
