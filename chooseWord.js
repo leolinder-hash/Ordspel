@@ -11,41 +11,39 @@ Välj slumpmässigt ut ett ord ur listan som uppfyller kriterierna i de övriga 
 Hantera på något väldefinierat sätt situationen som uppstår när inget passande ord finns
 Output: Det slumpmässigt utvalda ordet */
 
-export function chooseWord(words, length, sameLetters) {
+export function chooseWord(words, wordLength, allowDuplicates) {
 
-  const approvedWords = words.filter(word => {
+  const validWords = words.filter(word => {
 
-    if (word.length !== length) { //Stämmer längd?
+    if (word.length !== wordLength) { //Stämmer längd?
       return false;
     }
 
-    if (!sameLetters) { //Om bokstäver inte får förekomma mer än en gång
-      return hasUniqueletters(word);
+    if (!allowDuplicates) { //Om bokstäver inte får förekomma mer än en gång
+      return hasUniqueLetters(word);
     }
 
     return true;
   });
 
-  if (approvedWords.length === 0){ //Om inga ord finns i listan --> meddelande
+  if (validWords.length === 0){ //Om inga ord finns i listan --> null
     return null;
   }
 
   const index = Math.floor(Math.random() * approvedWords.length);
-  return approvedWords[index];
+  return validWords[index];
 }
+
+export function hasUniqueLetters(word) {
+  const letters = word.toLowerCase().split(""); //Lista med bokstäver
+  const uniqueLetters = new Set(letters); //Lista med bokstäver som är unika
+
+  return letters.length === uniqueLetters.size;
+};
 
 const words = ["Ponny", "Motorcross", "Husvagn", "Brödet", "Sjukhus", "Matta"];
 const length = 7;
-const sameLetters = false;
+const allowDuplicates = false;
 
-console.log(chooseWord(words, length, sameLetters));
-
-
-export function hasUniqueletters(word) {
-  let letters = word.split(""); //Lista med bokstäver
-  let uniqueLetters = new Set(letters); //Lista med bokstäver som är unika
-
-  return word.length === uniqueLetters.size;
-};
-
+console.log(chooseWord(words, length, allowDuplicates));
 

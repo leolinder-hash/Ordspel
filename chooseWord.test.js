@@ -1,6 +1,6 @@
 import { describe, it, expect } from "@jest/globals";
 import { chooseWord } from "./chooseWord.js";
-import { hasUniqueletters } from "./chooseWord.js";
+import { hasUniqueLetters } from "./chooseWord.js";
 
 
 /* Nedan följer tester som anses konstatera att logiken för chooseWord fungerar som väntat
@@ -44,10 +44,10 @@ describe("chooseWord", () => {
 
 describe("hasUniqueletters", () => {
   it("returns true when no repeated letters occur", () => {
-    expect(hasUniqueletters("CYKLA")).toBe(true);
+    expect(hasUniqueLetters("CYKLA")).toBe(true);
   })
 
   it("returns false when repeating letters occur", () => {
-    expect(hasUniqueletters("DRÖMMAR")).toBe(false);
+    expect(hasUniqueLetters("DRÖMMAR")).toBe(false);
   })
 })
