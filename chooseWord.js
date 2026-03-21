@@ -11,7 +11,7 @@ Välj slumpmässigt ut ett ord ur listan som uppfyller kriterierna i de övriga 
 Hantera på något väldefinierat sätt situationen som uppstår när inget passande ord finns
 Output: Det slumpmässigt utvalda ordet */
 
-function chooseWord(words, length, sameLetters) {
+export function chooseWord(words, length, sameLetters) {
 
   const approvedWords = words.filter(word => {
 
@@ -41,7 +41,7 @@ const sameLetters = false;
 console.log(chooseWord(words, length, sameLetters));
 
 
-function hasUniqueletters(word) {
+export function hasUniqueletters(word) {
   let letters = word.split(""); //Lista med bokstäver
   let uniqueLetters = new Set(letters); //Lista med bokstäver som är unika
 

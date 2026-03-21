@@ -1,5 +1,3 @@
-
-
 export function getFeedback(guessWord, correctWord) {
   //Kontrollera vilka bokstäver från det ena ordet som förekommer i det andra och i så fall var
   const guessLetters = guessWord.toLowerCase().split(''); //Alla bokstäver i de gissade ordet
