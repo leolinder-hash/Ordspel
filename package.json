@@ -6,7 +6,8 @@
   "main": "getFeeback.js",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watchAll --verbose"
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --watchAll --verbose",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "@jest/globals": "^30.3.0",
     "cross-env": "^10.1.0",
     "jest": "^30.3.0"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
   }
 }

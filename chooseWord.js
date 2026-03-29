@@ -30,7 +30,7 @@ export function chooseWord(words, wordLength, allowDuplicates) {
     return null;
   }
 
-  const index = Math.floor(Math.random() * approvedWords.length);
+  const index = Math.floor(Math.random() * validWords.length);
   return validWords[index];
 }
 
