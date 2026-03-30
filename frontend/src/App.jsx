@@ -22,18 +22,23 @@ function GameBoard() {
   );
 }
 
-function InputText({ text }) {
+function InputText({ text, value, onChange }) {
   //Måste kolla state så vi kan koppla till chooseWordFunktion
   //Måste eventuellt ha ett till state för namn till highscores
   //Och eventuellt ett till för gissning som ska kopplas till getFeedback func
   //Måste också skicka gissning till en array eller kanske till vår färdiga array i getFeedback?
+
+  console.log(value);
 
   return (
     <>
       <input
         type="text"
         placeholder={text}
-        size="50" />
+        size="50"
+        value={value}
+        onChange={onChange}
+      />
     </>
   );
 }
@@ -63,6 +68,9 @@ function CheckBox() {
 }
 
 function App() {
+  const [wordLength, setWordLength] = useState("");
+  const [guess, setGuess] = useState("");
+
   return (
     <>
       <Button
@@ -79,6 +87,8 @@ function App() {
 
       <InputText
         text="Enter desired word length"
+        value={wordLength}
+        onChange={(e) => setWordLength(e.target.value)}
       />
 
       <CheckBox />
@@ -88,7 +98,11 @@ function App() {
       />
 
       <InputText
-        text="Enter your guess here" />
+        text="Enter your guess here"
+        value={guess}
+        onChange={(e) => setGuess(e.target.value)}
+      />
+
       <Button
         buttonText="Submit"
       />
