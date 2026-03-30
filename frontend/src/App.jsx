@@ -1,121 +1,97 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+function Button({ buttonText }) {
+  //Antagligen state här också för att sätta onClick och göra olika saker baserat på
+  //Om det är för navigering till annan sida
+  //Eller för att starta spelet
+  return (
+    <button
+    >{buttonText}
+    </button>
+  );
+}
+
+function GameBoard() {
+  //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
+  //Alltså koppla till getFeedback
+  return (
+    <div>
+      <p>Here we will insert gameboard</p>
+    </div>
+  );
+}
+
+function InputText({ text }) {
+  //Måste kolla state så vi kan koppla till chooseWordFunktion
+  //Måste eventuellt ha ett till state för namn till highscores
+  //Och eventuellt ett till för gissning som ska kopplas till getFeedback func
+  //Måste också skicka gissning till en array eller kanske till vår färdiga array i getFeedback?
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <input
+        type="text"
+        placeholder={text}
+        size="50" />
     </>
-  )
+  );
+}
+
+function CheckBox() {
+  //Måste kolla state så att vi kan uppdatera chooseWord funktion
+  //Alltså skicka true/false
+
+  return (
+    <>
+      <p>Allow double letters?</p>
+      <input
+        type='checkbox'
+        name='yes'
+        id="checkBoxOne"
+      />
+
+      <label htmlFor="checkBoxOne">
+        yes
+      </label>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Button
+        buttonText="Highscores"
+      />
+
+      <Button
+        buttonText="About us"
+      />
+
+      <h1>Guess the word!</h1>
+
+      <GameBoard />
+
+      <InputText
+        text="Enter desired word length"
+      />
+
+      <CheckBox />
+
+      <Button
+        buttonText="Start"
+      />
+
+      <InputText
+        text="Enter your guess here" />
+      <Button
+        buttonText="Submit"
+      />
+    </>
+
+  );
+
 }
 
 export default App
