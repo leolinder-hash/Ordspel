@@ -39,9 +39,10 @@ function InputText({ text }) {
 }
 
 function CheckBox() {
+  const [isChecked, setIsChecked] = useState(false);
+  console.log(isChecked);
   //Måste kolla state så att vi kan uppdatera chooseWord funktion
   //Alltså skicka true/false
-
   return (
     <>
       <p>Allow double letters?</p>
@@ -49,6 +50,8 @@ function CheckBox() {
         type='checkbox'
         name='yes'
         id="checkBoxOne"
+        onChange={(event) => setIsChecked(event.target.checked)}
+        checked={isChecked}
       />
 
       <label htmlFor="checkBoxOne">
@@ -56,6 +59,7 @@ function CheckBox() {
       </label>
     </>
   );
+
 }
 
 function App() {
