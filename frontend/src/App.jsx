@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
 
-function Button({ buttonText }) {
+function Button({ buttonText, onClick }) {
   //Antagligen state här också för att sätta onClick och göra olika saker baserat på
   //Om det är för navigering till annan sida
   //Eller för att starta spelet
   return (
     <button
-    >{buttonText}
+      onClick={onClick}
+    >
+      {buttonText}
     </button>
   );
 }
@@ -22,7 +24,7 @@ function GameBoard() {
   );
 }
 
-function InputText({ text, value, onChange }) {
+function InputText({ text, value, onChange, onKeyDown }) {
   //Måste kolla state så vi kan koppla till chooseWordFunktion
   //Måste eventuellt ha ett till state för namn till highscores
   //Och eventuellt ett till för gissning som ska kopplas till getFeedback func
@@ -38,6 +40,7 @@ function InputText({ text, value, onChange }) {
         size="50"
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </>
   );
@@ -70,6 +73,30 @@ function CheckBox() {
 function App() {
   const [wordLength, setWordLength] = useState("");
   const [guess, setGuess] = useState("");
+  const [guessedWords, setGuessedWords] = useState([]);
+
+  function handleSubmitGuess() {
+
+    if (!guess.trim()) return;
+
+    setGuessedWords([...guessedWords,
+    {
+      guess: guess,
+      id: crypto.randomUUID()
+    }
+    ]);
+    setGuess("");
+  }
+
+  function onKeyDown(event) {
+    if (event.key === "Enter") {
+      handleSubmitGuess();
+    } else if (event.key === "Escape") {
+      setGuess("");
+    };
+  };
+
+  console.log(guessedWords)
 
   return (
     <>
@@ -101,10 +128,12 @@ function App() {
         text="Enter your guess here"
         value={guess}
         onChange={(e) => setGuess(e.target.value)}
+        onKeyDown={onKeyDown}
       />
 
       <Button
         buttonText="Submit"
+        onClick={handleSubmitGuess}
       />
     </>
 
