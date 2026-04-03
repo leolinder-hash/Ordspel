@@ -17,10 +17,34 @@ function Button({ buttonText, onClick }) {
 function GameBoard() {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
   //Alltså koppla till getFeedback
+
   return (
-    <div>
-      <p>Here we will insert gameboard</p>
+    <div
+      className='gameboard'
+    >
+      {[...Array(6)]
+        .map((_, rowIndex) => {
+          return (
+            <div
+              key={rowIndex}
+              className='row'
+            >
+              {[...Array(5)].map((_, cellIndex) => {
+                return (
+                  <div
+                    key={cellIndex}
+                    className='cell'
+                  >
+                    {rowIndex} - {cellIndex}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+
     </div>
+
   );
 }
 
@@ -99,43 +123,53 @@ function App() {
   console.log(guessedWords)
 
   return (
-    <>
-      <Button
-        buttonText="Highscores"
-      />
+    <div
+      className='app'
+    >
+      <div className=
+        'nav__buttons'
+      >
+        <Button
+          buttonText="Highscores"
+        />
 
-      <Button
-        buttonText="About us"
-      />
+        <Button
+          buttonText="About us"
+        />
+      </div>
 
       <h1>Guess the word!</h1>
 
       <GameBoard />
 
-      <InputText
-        text="Enter desired word length"
-        value={wordLength}
-        onChange={(e) => setWordLength(e.target.value)}
-      />
+      <div className='input__rules'>
+        <InputText
+          text="Enter desired word length"
+          value={wordLength}
+          onChange={(e) => setWordLength(e.target.value)}
+        />
 
-      <CheckBox />
+        <CheckBox />
+      </div>
 
       <Button
         buttonText="Start"
       />
 
-      <InputText
-        text="Enter your guess here"
-        value={guess}
-        onChange={(e) => setGuess(e.target.value)}
-        onKeyDown={onKeyDown}
-      />
+      <div>
+        <InputText
+          text="Enter your guess here"
+          value={guess}
+          onChange={(e) => setGuess(e.target.value)}
+          onKeyDown={onKeyDown}
+        />
 
-      <Button
-        buttonText="Submit"
-        onClick={handleSubmitGuess}
-      />
-    </>
+        <Button
+          buttonText="Submit"
+          onClick={handleSubmitGuess}
+        />
+      </div>
+    </div>
 
   );
 
