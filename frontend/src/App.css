@@ -1,12 +1,14 @@
+#root {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 body {
   background-color: wheat;
-  min-height: 100vh;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100vh;
 }
 
 .app {
@@ -15,6 +17,9 @@ body {
   flex-direction: column;
   gap: 1rem;
   padding: 1.25rem;
+
+  width: 100%;
+  max-width: 48rem;
 }
 
 .nav__buttons {
@@ -24,10 +29,40 @@ body {
   width: 100%;
 }
 
+.nav__buttons button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+}
+
+.nav__buttons button:hover {
+  background-color: rgb(120, 120, 242);
+}
+
+h1 {
+  color: black;
+}
+
 .gameboard {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.letter__length {
+  width: 2rem;
 }
 
 .row {
@@ -42,9 +77,51 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
+
 .input__rules {
   display: flex;
-  width: 50%;
+}
+
+.checkbox__input {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox__input p {
+  margin-right: 0.5rem;
+}
+
+.input__guess {
+  display: flex;
+}
+
+.input__guess input {
+  width: 11rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  font-size: 0.8rem;
+}
+
+.input__guess button {
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  color: white;
+  background-color: black;
+  margin-left: 0.5rem;
+}
+
+label,
+p {
+  color: black;
+}
+
+.start__button {
+  width: 5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: white;
+  background-color: coral;
 }

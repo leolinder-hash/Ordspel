@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
-function Button({ buttonText, onClick }) {
+function Button({ buttonText, onClick, className }) {
   //Antagligen state här också för att sätta onClick och göra olika saker baserat på
   //Om det är för navigering till annan sida
   //Eller för att starta spelet
   return (
     <button
+      className={className}
       onClick={onClick}
     >
       {buttonText}
@@ -41,14 +42,15 @@ function GameBoard() {
               })}
             </div>
           );
-        })}
+        })
+      }
 
     </div>
 
   );
 }
 
-function InputText({ text, value, onChange, onKeyDown }) {
+function InputText({ text, value, onChange, onKeyDown, className, label }) {
   //Måste kolla state så vi kan koppla till chooseWordFunktion
   //Måste eventuellt ha ett till state för namn till highscores
   //Och eventuellt ett till för gissning som ska kopplas till getFeedback func
@@ -57,7 +59,8 @@ function InputText({ text, value, onChange, onKeyDown }) {
   console.log(value);
 
   return (
-    <>
+    <div className='input'>
+      {label && <label>{label}</label>}
       <input
         type="text"
         placeholder={text}
@@ -65,8 +68,9 @@ function InputText({ text, value, onChange, onKeyDown }) {
         value={value}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        className={className}
       />
-    </>
+    </div>
   );
 }
 
@@ -76,8 +80,10 @@ function CheckBox() {
   //Måste kolla state så att vi kan uppdatera chooseWord funktion
   //Alltså skicka true/false
   return (
-    <>
-      <p>Allow double letters?</p>
+    <div
+      className='checkbox__input'
+    >
+      <p>Double letters?</p>
       <input
         type='checkbox'
         name='yes'
@@ -89,7 +95,7 @@ function CheckBox() {
       <label htmlFor="checkBoxOne">
         yes
       </label>
-    </>
+    </div>
   );
 
 }
@@ -98,6 +104,7 @@ function App() {
   const [wordLength, setWordLength] = useState("");
   const [guess, setGuess] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
+  const [gameStarted, setGameStarted] = useState(false);
 
   function handleSubmitGuess() {
 
@@ -119,6 +126,10 @@ function App() {
       setGuess("");
     };
   };
+
+  function handleStartGame() {
+    setGameStarted(true)
+  }
 
   console.log(guessedWords)
 
@@ -142,33 +153,43 @@ function App() {
 
       <GameBoard />
 
-      <div className='input__rules'>
-        <InputText
-          text="Enter desired word length"
-          value={wordLength}
-          onChange={(e) => setWordLength(e.target.value)}
-        />
+      {!gameStarted && (
+        <>
+          <div className='input__rules'>
+            <InputText
+              label="Desired word length:"
+              className="letter__length"
+              value={wordLength}
+              onChange={(e) => setWordLength(e.target.value)}
+            />
+          </div>
 
-        <CheckBox />
-      </div>
+          <CheckBox />
 
-      <Button
-        buttonText="Start"
-      />
+          <Button
+            className="start__button"
+            buttonText="Start"
+            onClick={handleStartGame}
+          />
+        </>
+      )}
 
-      <div>
-        <InputText
-          text="Enter your guess here"
-          value={guess}
-          onChange={(e) => setGuess(e.target.value)}
-          onKeyDown={onKeyDown}
-        />
+      {gameStarted && (
+        <div className='input__guess'>
+          <InputText
+            text="Enter your guess here"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            onKeyDown={onKeyDown}
+          />
 
-        <Button
-          buttonText="Submit"
-          onClick={handleSubmitGuess}
-        />
-      </div>
+          <Button
+            buttonText="Submit"
+            onClick={handleSubmitGuess}
+          />
+        </div>
+      )}
+
     </div>
 
   );
