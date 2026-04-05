@@ -15,9 +15,10 @@ function Button({ buttonText, onClick, className }) {
   );
 }
 
-function GameBoard( {guessedWords}) {
+function GameBoard( {guessedWords, wordLength}) {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
   //Alltså koppla till getFeedback
+  const numberOfLetters = wordLength || 5;
 
 
   return (
@@ -35,7 +36,7 @@ function GameBoard( {guessedWords}) {
               key={rowIndex}
               className='row'
             >
-              {[...Array(5)].map((_, cellIndex) => {
+              {[...Array(numberOfLetters)].map((_, cellIndex) => {
                 const letter = letters[cellIndex] || "";
                 return (
                   <div
@@ -159,6 +160,7 @@ function App() {
 
       <GameBoard
         guessedWords={guessedWords}
+        wordLength ={wordLength}
       />
 
       {!gameStarted && (
@@ -168,7 +170,7 @@ function App() {
               label="Desired word length:"
               className="letter__length"
               value={wordLength}
-              onChange={(e) => setWordLength(e.target.value)}
+              onChange={(e) => setWordLength(Number(e.target.value))}
             />
           </div>
 
