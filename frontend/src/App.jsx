@@ -15,9 +15,10 @@ function Button({ buttonText, onClick, className }) {
   );
 }
 
-function GameBoard() {
+function GameBoard( {guessedWords}) {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
   //Alltså koppla till getFeedback
+
 
   return (
     <div
@@ -25,18 +26,23 @@ function GameBoard() {
     >
       {[...Array(6)]
         .map((_, rowIndex) => {
+          const guessedWord = guessedWords[rowIndex];
+          const word = guessedWord?.guess || "";
+          const letters = word.toUpperCase().split("");
+
           return (
             <div
               key={rowIndex}
               className='row'
             >
               {[...Array(5)].map((_, cellIndex) => {
+                const letter = letters[cellIndex] || "";
                 return (
                   <div
                     key={cellIndex}
                     className='cell'
                   >
-                    {rowIndex} - {cellIndex}
+                    {letter}
                   </div>
                 );
               })}
@@ -151,7 +157,9 @@ function App() {
 
       <h1>Guess the word!</h1>
 
-      <GameBoard />
+      <GameBoard
+        guessedWords={guessedWords}
+      />
 
       {!gameStarted && (
         <>
