@@ -58,14 +58,23 @@ h1 {
   gap: 0.5rem;
 }
 
-.active--row {
-  border: 4px solid red;
+.active--row .cell {
+  border-color: red;
+}
+
+.locked--row .cell {
+  background-color: rgb(200, 195, 195);  
+}
+
+.future--row .cell {
+  border-color: grey;
+  opacity: 0.6;
 }
 
 .cell {
   width: 3rem;
   height: 3rem;
-  border: 1px solid black;
+  border: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: center;

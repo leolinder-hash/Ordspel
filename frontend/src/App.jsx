@@ -31,11 +31,17 @@ function GameBoard({ guessedWords, wordLength }) {
           const word = guessedWord?.guess || "";
           const letters = word.toUpperCase().split("");
           const isActive = rowIndex === guessedWords.length;
+          const isLocked = rowIndex < guessedWords.length;
+          const isFuture = rowIndex > guessedWords.length;
 
           return (
             <div
               key={rowIndex}
-              className= {`row ${isActive ? 'active--row' : ''}`}
+              className={`row 
+              ${isActive ? 'active--row' : ''}
+              ${isLocked ? 'locked--row' : ''}
+              ${isFuture ? 'future--row' : ''} 
+              `}
             >
               {[...Array(numberOfLetters)].map((_, cellIndex) => {
                 const letter = letters[cellIndex] || "";
