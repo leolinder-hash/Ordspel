@@ -122,7 +122,10 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleSubmitGuess() {
+
     const maxLength = Number(wordLength) || 5;
+
+    if (guessedWords >= 6) return;
 
     if (!guess.trim()) return;
 
@@ -155,7 +158,7 @@ function App() {
 
     if (value.length <= maxLength) {
       setGuess(value);
-    } 
+    }
   }
 
   console.log(guessedWords)
