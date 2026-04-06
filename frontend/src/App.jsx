@@ -15,10 +15,10 @@ function Button({ buttonText, onClick, className }) {
   );
 }
 
-function GameBoard( {guessedWords, wordLength}) {
+function GameBoard({ guessedWords, wordLength }) {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
   //Alltså koppla till getFeedback
-  const numberOfLetters = wordLength || 5;
+  const numberOfLetters = Number(wordLength) || 5;
 
 
   return (
@@ -57,7 +57,15 @@ function GameBoard( {guessedWords, wordLength}) {
   );
 }
 
-function InputText({ text, value, onChange, onKeyDown, className, label }) {
+function InputText(
+  {
+    text,
+    value,
+    onChange,
+    onKeyDown,
+    className,
+    label,
+  }) {
   //Måste kolla state så vi kan koppla till chooseWordFunktion
   //Måste eventuellt ha ett till state för namn till highscores
   //Och eventuellt ett till för gissning som ska kopplas till getFeedback func
@@ -114,8 +122,11 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
 
   function handleSubmitGuess() {
+    const maxLength = Number(wordLength) || 5;
 
     if (!guess.trim()) return;
+
+    if (guess.length !== maxLength) return;
 
     setGuessedWords([...guessedWords,
     {
@@ -136,6 +147,15 @@ function App() {
 
   function handleStartGame() {
     setGameStarted(true)
+  }
+
+  function validateWordLength(e) {
+    const value = e.target.value;
+    const maxLength = Number(wordLength) || 5;
+
+    if (value.length <= maxLength) {
+      setGuess(value);
+    } 
   }
 
   console.log(guessedWords)
@@ -160,7 +180,7 @@ function App() {
 
       <GameBoard
         guessedWords={guessedWords}
-        wordLength ={wordLength}
+        wordLength={wordLength}
       />
 
       {!gameStarted && (
@@ -170,7 +190,7 @@ function App() {
               label="Desired word length:"
               className="letter__length"
               value={wordLength}
-              onChange={(e) => setWordLength(Number(e.target.value))}
+              onChange={(e) => setWordLength(e.target.value)}
             />
           </div>
 
@@ -189,7 +209,7 @@ function App() {
           <InputText
             text="Enter your guess here"
             value={guess}
-            onChange={(e) => setGuess(e.target.value)}
+            onChange={validateWordLength}
             onKeyDown={onKeyDown}
           />
 
