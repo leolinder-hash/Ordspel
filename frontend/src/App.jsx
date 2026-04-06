@@ -30,11 +30,12 @@ function GameBoard({ guessedWords, wordLength }) {
           const guessedWord = guessedWords[rowIndex];
           const word = guessedWord?.guess || "";
           const letters = word.toUpperCase().split("");
+          const isActive = rowIndex === guessedWords.length;
 
           return (
             <div
               key={rowIndex}
-              className='row'
+              className= {`row ${isActive ? 'active--row' : ''}`}
             >
               {[...Array(numberOfLetters)].map((_, cellIndex) => {
                 const letter = letters[cellIndex] || "";
