@@ -123,17 +123,32 @@ function CheckBox() {
 
 }
 
+function HighscoreForm({ label }) {
+  return (
+    <div>
+      <p>Congratulations, you won!</p>
+      <InputText
+      />
+    </div>
+  );
+}
+
 function App() {
   const [wordLength, setWordLength] = useState("");
   const [guess, setGuess] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [gameIsFinished, setGameIsFinished] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
+  const numberOfGuesses = guessedWords.length + 1;
+
+  const randomWord = "Alger";
 
   function handleSubmitGuess() {
 
     const maxLength = Number(wordLength) || 5;
 
-    if (guessedWords >= 6) return;
+    if (gameIsFinished) return;
 
     if (!guess.trim()) return;
 
@@ -146,6 +161,17 @@ function App() {
     }
     ]);
     setGuess("");
+
+    const nextGuessCount = guessedWords.length + 1;
+
+    if (guess.toLowerCase() === randomWord.toLowerCase()) {
+      setGameWon(true)
+      setGameIsFinished(true);
+    }
+
+    else if (nextGuessCount >= 6) {
+      setGameIsFinished(true);
+    }
   }
 
   function onKeyDown(event) {
@@ -157,7 +183,7 @@ function App() {
   };
 
   function handleStartGame() {
-    setGameStarted(true)
+    setGameStarted(true);
   }
 
   function validateWordLength(e) {
@@ -216,7 +242,7 @@ function App() {
         </>
       )}
 
-      {gameStarted && (
+      {gameStarted && !gameIsFinished && (
         <div className='input__guess'>
           <InputText
             text="Enter your guess here"
@@ -230,6 +256,19 @@ function App() {
             onClick={handleSubmitGuess}
           />
         </div>
+      )}
+
+      {gameWon && gameIsFinished && (
+        <HighscoreForm />
+      )}
+
+      {!gameWon && gameIsFinished && (
+        <>
+          <p>You failed to guess the correct word</p>
+          <Button
+            buttonText="Try again"
+          />
+        </>
       )}
 
     </div>
