@@ -130,8 +130,9 @@ function HighscoreForm({
   className,
   classNameButton,
   playerName,
-  onClick,
-  onChange
+  onSubmit,
+  onChange,
+  onPlayAgain
 }) {
   return (
     <>
@@ -146,12 +147,13 @@ function HighscoreForm({
         />
         <Button
           buttonText={buttonText}
-          onClick={onClick}
+          onClick={onSubmit}
         />
       </div>
       <Button
         buttonText={buttonText2}
         className={classNameButton}
+        onClick={onPlayAgain}
       />
     </>
   );
@@ -238,6 +240,16 @@ function App() {
 
   console.log(guessedWords)
 
+  function gameReset() {
+      setGameWon(false);
+      setGameIsFinished(false);
+      setGameStarted(false);
+      setGuessedWords([]);
+      setGuess("");
+      setPlayerName("");
+    
+  }
+
   return (
     <div
       className='app'
@@ -310,7 +322,8 @@ function App() {
           playerName={playerName}
           onChange={handlePlayerName}
 
-          onClick={handleSubmitStats}
+          onSubmit={handleSubmitStats}
+          onPlayAgain = {gameReset}
         />
       )}
 
@@ -319,6 +332,7 @@ function App() {
           <p>You failed to guess the correct word</p>
           <Button
             buttonText="Try again"
+            onClick={gameReset}
           />
         </>
       )}
