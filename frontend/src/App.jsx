@@ -123,13 +123,37 @@ function CheckBox() {
 
 }
 
-function HighscoreForm({ label }) {
+function HighscoreForm({
+  label,
+  buttonText,
+  buttonText2,
+  className,
+  classNameButton,
+  playerName,
+  onClick,
+  onChange
+}) {
   return (
-    <div>
+    <>
       <p>Congratulations, you won!</p>
-      <InputText
+
+      <div className='highscoreForm'>
+        <InputText
+          label={label}
+          className={className}
+          value={playerName}
+          onChange={onChange}
+        />
+        <Button
+          buttonText={buttonText}
+          onClick={onClick}
+        />
+      </div>
+      <Button
+        buttonText={buttonText2}
+        className={classNameButton}
       />
-    </div>
+    </>
   );
 }
 
@@ -140,7 +164,8 @@ function App() {
   const [gameStarted, setGameStarted] = useState(false);
   const [gameIsFinished, setGameIsFinished] = useState(false);
   const [gameWon, setGameWon] = useState(false);
-  const numberOfGuesses = guessedWords.length + 1;
+  const [playerName, setPlayerName] = useState("");
+  const [playerStats, setPlayerStats] = useState([]);
 
   const randomWord = "Alger";
 
@@ -195,6 +220,22 @@ function App() {
     }
   }
 
+  function handlePlayerName(e) {
+    setPlayerName(e.target.value);
+  }
+
+  function handleSubmitStats() {
+    setPlayerStats([...playerStats,
+    {
+      name: playerName,
+      guesses: guessedWords.length
+    }
+    ])
+  }
+
+  console.log(playerStats)
+
+
   console.log(guessedWords)
 
   return (
@@ -235,7 +276,7 @@ function App() {
           <CheckBox />
 
           <Button
-            className="start__button"
+            className="Play__button"
             buttonText="Start"
             onClick={handleStartGame}
           />
@@ -245,6 +286,7 @@ function App() {
       {gameStarted && !gameIsFinished && (
         <div className='input__guess'>
           <InputText
+            className="input__general"
             text="Enter your guess here"
             value={guess}
             onChange={validateWordLength}
@@ -259,7 +301,17 @@ function App() {
       )}
 
       {gameWon && gameIsFinished && (
-        <HighscoreForm />
+        <HighscoreForm
+          label="Name"
+          buttonText="Submit"
+          buttonText2="Again"
+          className="input__general"
+          classNameButton="play__button"
+          playerName={playerName}
+          onChange={handlePlayerName}
+
+          onClick={handleSubmitStats}
+        />
       )}
 
       {!gameWon && gameIsFinished && (
