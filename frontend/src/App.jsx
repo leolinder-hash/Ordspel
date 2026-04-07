@@ -15,7 +15,7 @@ function Button({ buttonText, onClick, className }) {
   );
 }
 
-function GameBoard({ guessedWords, wordLength }) {
+function GameBoard({ guessedWords, wordLength, guess }) {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
   //Alltså koppla till getFeedback
   const numberOfLetters = Number(wordLength) || 5;
@@ -27,12 +27,13 @@ function GameBoard({ guessedWords, wordLength }) {
     >
       {[...Array(6)]
         .map((_, rowIndex) => {
-          const guessedWord = guessedWords[rowIndex];
-          const word = guessedWord?.guess || "";
-          const letters = word.toUpperCase().split("");
           const isActive = rowIndex === guessedWords.length;
           const isLocked = rowIndex < guessedWords.length;
           const isFuture = rowIndex > guessedWords.length;
+          const guessedWord = guessedWords[rowIndex];
+          const word = isActive ? (guess || "") : (guessedWord?.guess || "");
+          const letters = word.toUpperCase().split("");
+
 
           return (
             <div
@@ -191,6 +192,7 @@ function App() {
       <GameBoard
         guessedWords={guessedWords}
         wordLength={wordLength}
+        guess={guess}
       />
 
       {!gameStarted && (
