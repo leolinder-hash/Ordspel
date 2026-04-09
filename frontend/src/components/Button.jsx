@@ -1,4 +1,4 @@
-
+import './Button.css'
 
 export function Button({ buttonText, onClick, className }) {
   //Antagligen state här också för att sätta onClick och göra olika saker baserat på

@@ -1,3 +1,4 @@
+import './GameBoard.css'
 
 export function GameBoard({ guessedWords, wordLength, guess }) {
   //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced

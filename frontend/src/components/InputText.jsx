@@ -1,4 +1,4 @@
-
+import './inputText.css'
 
 export function InputText(
   {

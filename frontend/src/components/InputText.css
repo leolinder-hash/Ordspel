@@ -1,0 +1,15 @@
+.input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input__general {
+  width: 11rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+  font-size: 0.8rem;
+}

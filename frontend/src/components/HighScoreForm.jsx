@@ -1,3 +1,8 @@
+import { InputText } from './InputText';
+import { Button } from './Button';
+
+import './HighscoreForm.css'
+
 
 export function HighscoreForm({
   label,
@@ -11,7 +16,7 @@ export function HighscoreForm({
   onPlayAgain
 }) {
   return (
-    <>
+    <div className='game__won'>
       <p>Congratulations, you won!</p>
 
       <div className='highscoreForm'>
@@ -31,6 +36,6 @@ export function HighscoreForm({
         className={classNameButton}
         onClick={onPlayAgain}
       />
-    </>
+    </div>
   );
 }

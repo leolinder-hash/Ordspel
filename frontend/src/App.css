@@ -9,107 +9,20 @@
   max-width: 48rem;
 }
 
-.nav__buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  width: 100%;
-}
-
-.nav__buttons button {
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid black;
-  color: white;
-  background-color: blue;
-  cursor: pointer;
-}
-
-.nav__buttons button:hover {
-  background-color: rgb(120, 120, 242);
-}
-
-h1 {
-  color: black;
-}
-
-.gameboard {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.input {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.letter__length {
-  width: 2rem;
-}
-
-.row {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.active--row .cell {
-  border-color: red;
-}
-
-.locked--row .cell {
-  background-color: rgb(200, 195, 195);
-}
-
-.future--row .cell {
-  border-color: grey;
-  opacity: 0.6;
-}
-
-.cell {
-  width: 3rem;
-  height: 3rem;
-  border: 2px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .input__rules {
   display: flex;
 }
 
-.checkbox__input {
+.input__guess input {
   display: flex;
-  flex-direction: row;
-}
-
-.checkbox__input p {
-  margin-right: 0.5rem;
-}
-
-.input__guess {
-  display: flex;
-}
-
-/* .input__guess input {
-  width: 11rem;
+  width: 12rem;
   padding: 0.3rem;
   border-radius: 0.3rem;
   border: 1px solid black;
-  font-size: 0.8rem;
-} */
+}
 
-.input__general {
-  width: 11rem;
-  padding: 0.3rem;
-  border-radius: 0.3rem;
-  border: 1px solid black;
-  font-size: 0.8rem;
+.input__guess .input {
+  margin: 0;
 }
 
 .input__guess button {
@@ -120,21 +33,26 @@ h1 {
   margin-left: 0.5rem;
 }
 
-label,
-p {
-  color: black;
+.letter__length {
+  width: 2rem;
 }
 
-.play__button {
-  width: 5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  color: white;
-  background-color: coral;
-}
-
-.highscoreForm {
+.game__lost {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem
+}
+
+.game__won {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game__won play__button {
+  margin-top: 1.5rem;
 }

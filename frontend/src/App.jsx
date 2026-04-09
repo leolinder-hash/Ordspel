@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import './App.css'
 import { Button } from './components/Button';
 import { GameBoard } from './components/GameBoard';
 import { InputText } from './components/InputText';
 import { CheckBox } from './components/CheckBox';
-import { HighscoreForm } from './components/HighScoreForm';
+import { HighscoreForm } from './components/HighscoreForm';
+import './App.css'
+
 
 
 function App() {
@@ -140,7 +141,7 @@ function App() {
           />
 
           <Button
-            className="Play__button"
+            className="play__button"
             buttonText="Start"
             onClick={handleStartGame}
           />
@@ -180,13 +181,14 @@ function App() {
       )}
 
       {!gameWon && gameIsFinished && (
-        <>
+        <div className='game__lost'>
           <p>You failed to guess the correct word</p>
           <Button
             buttonText="Try again"
             onClick={gameReset}
+            className="play__button"
           />
-        </>
+        </div>
       )}
 
     </div>

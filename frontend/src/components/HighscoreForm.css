@@ -1,0 +1,12 @@
+.highscoreForm {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.highscoreForm input {
+  width: 12rem;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid black;
+}
