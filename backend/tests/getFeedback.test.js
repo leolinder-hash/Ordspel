@@ -1,6 +1,6 @@
 import { describe, it, expect } from "@jest/globals";
-import { getFeedback } from "./getFeedback.js";
-import { checkLetter } from "./getFeedback.js";
+import { getFeedback } from "../getFeedback.js";
+import { checkLetter } from "../getFeedback.js";
 
 /* Testerna nedan utgår från olika scenarion i guessWord, och att de hanteras korrekt
 

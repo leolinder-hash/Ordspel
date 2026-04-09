@@ -37,6 +37,7 @@ function App() {
       id: crypto.randomUUID()
     }
     ]);
+
     setGuess("");
 
     const nextGuessCount = guessedWords.length + 1;
@@ -85,11 +86,6 @@ function App() {
     ])
   }
 
-  console.log(playerStats)
-
-
-  console.log(guessedWords)
-
   function gameReset() {
     setGameWon(false);
     setGameIsFinished(false);
@@ -97,7 +93,6 @@ function App() {
     setGuessedWords([]);
     setGuess("");
     setPlayerName("");
-
   }
 
   return (
