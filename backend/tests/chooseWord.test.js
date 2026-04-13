@@ -1,6 +1,6 @@
 import { describe, it, expect } from "@jest/globals";
-import { chooseWord } from "../chooseWord.js";
-import { hasUniqueLetters } from "../chooseWord.js";
+import { chooseWord } from "../services/chooseWordService.js";
+import { hasUniqueLetters } from "../services/chooseWordService.js";
 
 
 /* Nedan följer tester som anses konstatera att logiken för chooseWord fungerar som väntat

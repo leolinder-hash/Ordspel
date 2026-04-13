@@ -1,4 +1,5 @@
 import express from "express";
+import { getFeedback } from "../../services/getFeedbackService.js";
 
 const apiRouter = express.Router();
 
@@ -57,6 +58,69 @@ apiRouter.post('/game/start', (req, res) => {
     status: gameSession.status,
     settings: gameSession.settings
   });
+})
+
+apiRouter.post('/game/guess', (req, res) => {
+  const { sessionId, guess } = req.body;
+  const gameSession = activeSessions.get(sessionId);
+
+  if (!gameSession) {
+    res.status(404).json({
+      message: "Can't find specified gamesession"
+    })
+
+    return;
+  }
+
+  if (gameSession.status !== "active") {
+    res.status(400).json({
+      message: "Game session is not active!"
+    })
+
+    return;
+  }
+
+  if (typeof guess !== "string") {
+    res.status(400).json({
+      message: "Guess must be a string"
+    })
+
+    return;
+  }
+
+  if (guess.length !== gameSession.settings.wordLength) {
+    res.status(400).json({
+      message: "Length needs to match specified word-length"
+    })
+
+    return;
+  }
+
+  const result = getFeedback(guess, gameSession.correctWord);
+  gameSession.guesses.push({
+    guess,
+    result
+  });
+
+  const isWin = result.every(letter => letter.result === "correct")
+
+  if (isWin) {
+    gameSession.status = "won";
+    gameSession.endedAt = new Date();
+  } else if (gameSession.guesses.length >= 6) {
+    gameSession.status = "lost";
+    gameSession.endedAt = new Date();
+  }
+
+  res.json({
+    gameStatus: gameSession.status,
+    letterFeedback: result,
+    guesses: gameSession.guesses.length
+  })
+
+
+
+
 })
 
 export default apiRouter;
