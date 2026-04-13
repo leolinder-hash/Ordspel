@@ -31,6 +31,8 @@ apiRouter.post('/game/start', (req, res) => {
     return;
   }
 
+  //Lägg in guard för om ord är kortare eller lika med 0
+
   const gameSession = {
     gameSessionId: sessionId,
     createdAt: new Date(),
@@ -66,7 +68,7 @@ apiRouter.post('/game/guess', (req, res) => {
 
   if (!gameSession) {
     res.status(404).json({
-      message: "Can't find specified gamesession"
+      message: "Can't find specified game session"
     })
 
     return;
@@ -117,10 +119,6 @@ apiRouter.post('/game/guess', (req, res) => {
     letterFeedback: result,
     guesses: gameSession.guesses.length
   })
-
-
-
-
 })
 
 export default apiRouter;

@@ -5,6 +5,8 @@ import apiRouter from "./routes/apiRoutes.js"
 const app = express();
 const port = 5080;
 
+app.use(express.json());
+
 app.use('/', pagesRouter);
 app.use('/api', apiRouter);
 
