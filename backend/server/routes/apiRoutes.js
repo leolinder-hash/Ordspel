@@ -1,6 +1,7 @@
 import express from "express";
 import { getFeedback } from "../../services/getFeedbackService.js";
-
+import { chooseWord } from "../../services/chooseWordService.js";
+import words from "../../services/wordService.js";
 const apiRouter = express.Router();
 
 apiRouter.get('/words', (req, res) => {
@@ -12,8 +13,8 @@ const activeSessions = new Map();
 
 apiRouter.post('/game/start', (req, res) => {
   const { wordLength, allowDuplicateLetters } = req.body;
+  const allowDuplicates = allowDuplicateLetters ?? false;
   const sessionId = crypto.randomUUID();
-  const randomWord = "apple";
 
   if (typeof wordLength !== "number") {
     res.status(400).json({
@@ -33,13 +34,23 @@ apiRouter.post('/game/start', (req, res) => {
 
   //Lägg in guard för om ord är kortare eller lika med 0
 
+  const randomWord = chooseWord(words, wordLength, allowDuplicates);
+
+  if (!randomWord) {
+    res.status(400).json({
+      message: "Bad request, can't find matching word"
+    })
+
+    return;
+  }
+
   const gameSession = {
     gameSessionId: sessionId,
     createdAt: new Date(),
 
     settings: {
       wordLength: wordLength,
-      allowDuplicateLetters: allowDuplicateLetters ?? false,
+      allowDuplicateLetters: allowDuplicates
     },
 
     correctWord: randomWord,
@@ -58,7 +69,7 @@ apiRouter.post('/game/start', (req, res) => {
   res.json({
     sessionId: gameSession.gameSessionId,
     status: gameSession.status,
-    settings: gameSession.settings
+    settings: gameSession.settings,
   });
 })
 

@@ -10,4 +10,5 @@ const data = fs.readFileSync(filePath, "utf-8");
 
 const words = data.split('\n').
 map(word=> word.trim());
-console.log(words.slice(0,10));
+
+export default words;

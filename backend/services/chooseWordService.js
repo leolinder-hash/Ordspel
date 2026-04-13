@@ -41,9 +41,9 @@ export function hasUniqueLetters(word) {
   return letters.length === uniqueLetters.size;
 };
 
-const words = ["Ponny", "Motorcross", "Husvagn", "Brödet", "Sjukhus", "Matta"];
+/* const words = ["Ponny", "Motorcross", "Husvagn", "Brödet", "Sjukhus", "Matta"];
 const length = 7;
 const allowDuplicates = false;
 
-console.log(chooseWord(words, length, allowDuplicates));
+console.log(chooseWord(words, length, allowDuplicates)); */
 
