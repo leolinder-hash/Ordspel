@@ -18,10 +18,10 @@ function App() {
   const [gameWon, setGameWon] = useState(false);
   const [playerName, setPlayerName] = useState("");
   const [playerStats, setPlayerStats] = useState([]);
+  const [sessionId, setSessionId] = useState(null);
 
-  const randomWord = "Alger";
 
-  function handleSubmitGuess() {
+  async function handleSubmitGuess() {
 
     const maxLength = Number(wordLength) || 5;
 
@@ -42,12 +42,25 @@ function App() {
 
     const nextGuessCount = guessedWords.length + 1;
 
-    if (guess.toLowerCase() === randomWord.toLowerCase()) {
+    const response = await fetch("api/game/guess", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        sessionId: sessionId,
+        guess: guess
+      })
+    })
+
+    const data = await response.json();
+
+    if (data.gameStatus === "won") {
       setGameWon(true)
       setGameIsFinished(true);
     }
 
-    else if (nextGuessCount >= 6) {
+    else if (data.gameStatus === "lost") {
       setGameIsFinished(true);
     }
   }
@@ -75,7 +88,8 @@ function App() {
     })
 
     const data = await response.json();
-    console.log(data);
+
+    setSessionId(data.sessionId)
   }
 
   function validateWordLength(e) {
