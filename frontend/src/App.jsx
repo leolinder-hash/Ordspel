@@ -9,7 +9,7 @@ import './App.css'
 
 
 function App() {
-  const [wordLength, setWordLength] = useState("");
+  const [wordLength, setWordLength] = useState("5");
   const [isChecked, setIsChecked] = useState(false);
   const [guess, setGuess] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
@@ -60,8 +60,22 @@ function App() {
     };
   };
 
-  function handleStartGame() {
+  async function handleStartGame() {
     setGameStarted(true);
+
+    const response = await fetch("api/game/start", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        wordLength: Number(wordLength),
+        allowDuplicateLetters: isChecked
+      })
+    })
+
+    const data = await response.json();
+    console.log(data);
   }
 
   function validateWordLength(e) {
