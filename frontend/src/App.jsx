@@ -31,16 +31,8 @@ function App() {
 
     if (guess.length !== maxLength) return;
 
-    setGuessedWords([...guessedWords,
-    {
-      guess: guess,
-      id: crypto.randomUUID()
-    }
-    ]);
-
-    setGuess("");
-
     const nextGuessCount = guessedWords.length + 1;
+    const currentGuess = guess;
 
     const response = await fetch("api/game/guess", {
       method: "POST",
@@ -49,11 +41,21 @@ function App() {
       },
       body: JSON.stringify({
         sessionId: sessionId,
-        guess: guess
+        guess: currentGuess
       })
     })
 
     const data = await response.json();
+
+    setGuessedWords([...guessedWords,
+    {
+      guess: currentGuess,
+      letterFeedback: data.letterFeedback,
+      id: crypto.randomUUID()
+    }
+    ]);
+
+    setGuess("");
 
     if (data.gameStatus === "won") {
       setGameWon(true)

@@ -31,3 +31,15 @@
   align-items: center;
   justify-content: center;
 }
+
+.locked--row .correct--cell {
+  background-color: green;
+}
+
+.locked--row .incorrect--cell {
+  background-color: red;
+}
+
+.locked--row .misplaced--cell {
+  background-color: yellow;
+}

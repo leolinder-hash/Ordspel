@@ -13,6 +13,10 @@
   display: flex;
 }
 
+.input__guess {
+  display: flex;
+}
+
 .input__guess input {
   display: flex;
   width: 12rem;

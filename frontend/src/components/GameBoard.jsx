@@ -16,6 +16,7 @@ export function GameBoard({ guessedWords, wordLength, guess }) {
           const isLocked = rowIndex < guessedWords.length;
           const isFuture = rowIndex > guessedWords.length;
           const guessedWord = guessedWords[rowIndex];
+          const rowFeedback = guessedWord?.letterFeedback || [];
           const word = isActive ? (guess || "") : (guessedWord?.guess || "");
           const letters = word.toUpperCase().split("");
 
@@ -31,10 +32,21 @@ export function GameBoard({ guessedWords, wordLength, guess }) {
             >
               {[...Array(numberOfLetters)].map((_, cellIndex) => {
                 const letter = letters[cellIndex] || "";
+                const feedBackItem = rowFeedback[cellIndex];
+                const result = feedBackItem?.result;
+
+                const isCorrect = result === "correct";
+                const isMisplaced = result === "misplaced";
+                const isIncorrect = result === "incorrect";
+
                 return (
                   <div
                     key={cellIndex}
-                    className='cell'
+                    className={`cell
+                    ${isLocked && isCorrect ? "correct--cell" : ""} 
+                    ${isLocked && isIncorrect ? "incorrect--cell" : ""} 
+                    ${isLocked && isMisplaced ? "misplaced--cell" : ""}
+                    `}
                   >
                     {letter}
                   </div>
