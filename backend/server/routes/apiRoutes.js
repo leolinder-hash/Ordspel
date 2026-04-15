@@ -39,6 +39,7 @@ apiRouter.post('/game/start', (req, res) => {
 
     return;
   }
+
   const randomWord = chooseWord(words, wordLength, allowDuplicates);
 
   if (!randomWord) {
@@ -134,6 +135,52 @@ apiRouter.post('/game/guess', (req, res) => {
     gameStatus: gameSession.status,
     letterFeedback: result,
     guesses: gameSession.guesses.length
+  })
+})
+
+apiRouter.post('/highscores', (req, res) => {
+  const { playerName, sessionId } = req.body;
+  const gameSession = activeSessions.get(sessionId);
+
+  if (!gameSession) {
+    res.status(404).json({
+      message: "Can't find specified game session"
+    })
+
+    return;
+  }
+
+  if (gameSession.status !== "won") {
+    res.status(400).json({
+      message: "Game has not been won"
+    })
+
+    return;
+  }
+
+  if (gameSession.resultSubmitted === true) {
+    res.status(409).json({
+      message: "result has already been submitted"
+    })
+
+    return;
+  }
+
+  const highscore = {
+    sessionId: gameSession.gameSessionId,
+    playerName: playerName,
+    guesses: gameSession.guesses,
+    numberOfGuesses: gameSession.guesses.length,
+    time: gameSession.endedAt - gameSession.startedAt,
+    settings: gameSession.settings,
+    date: new Date(),
+  }
+
+  gameSession.resultSubmitted = true;
+
+  res.status(201).json({
+    message: "Highscore was saved",
+    highscore: highscore
   })
 })
 
