@@ -32,8 +32,13 @@ apiRouter.post('/game/start', (req, res) => {
     return;
   }
 
-  //Lägg in guard för om ord är kortare eller lika med 0
+  if (wordLength <= 0) {
+    res.status(400).json({
+      message: "Wordlength can't be less than zero"
+    })
 
+    return;
+  }
   const randomWord = chooseWord(words, wordLength, allowDuplicates);
 
   if (!randomWord) {
