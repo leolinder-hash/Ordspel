@@ -107,13 +107,40 @@ function App() {
     setPlayerName(e.target.value);
   }
 
-  function handleSubmitStats() {
-    setPlayerStats([...playerStats,
-    {
-      name: playerName,
-      guesses: guessedWords.length
+  async function handleSubmitStats() {
+
+    if (!playerName.trim()) return;
+
+    const response = await fetch("/api/highscores", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        playerName: playerName,
+        sessionId: sessionId
+      })
+    })
+
+    if (!response.ok) {
+      console.error("Failed to save highscore");
+      return;
     }
+
+    const data = await response.json();
+
+
+    console.log(data);
+
+    setPlayerStats(prev => [
+      ...prev,
+      {
+        name: playerName,
+        guesses: guessedWords.length
+      }
     ])
+
+    setPlayerName("");
   }
 
   function gameReset() {

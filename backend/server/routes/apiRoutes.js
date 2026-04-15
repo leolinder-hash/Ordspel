@@ -10,6 +10,7 @@ apiRouter.get('/words', (req, res) => {
 })
 
 const activeSessions = new Map();
+const highScores = [];
 
 apiRouter.post('/game/start', (req, res) => {
   const { wordLength, allowDuplicateLetters } = req.body;
@@ -171,12 +172,14 @@ apiRouter.post('/highscores', (req, res) => {
     playerName: playerName,
     guesses: gameSession.guesses,
     numberOfGuesses: gameSession.guesses.length,
-    time: gameSession.endedAt - gameSession.startedAt,
+    time: (gameSession.endedAt - gameSession.startedAt) / 1000,
     settings: gameSession.settings,
     date: new Date(),
   }
 
   gameSession.resultSubmitted = true;
+
+  highScores.push(highscore);
 
   res.status(201).json({
     message: "Highscore was saved",
