@@ -1,4 +1,5 @@
 import express from "express";
+import highScores from "../../data/highscoreList.js";
 
 const pagesRouter = express.Router();
 
@@ -11,7 +12,9 @@ pagesRouter.get('/about', (req, res) => {
 })
 
 pagesRouter.get('/highscores', (req, res) => {
-  res.send("This is the highscore page");
+  res.render("highscores", {
+    highscores: highScores
+  });
 })
 
 export default pagesRouter;

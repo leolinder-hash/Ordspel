@@ -2,6 +2,8 @@ import express from "express";
 import { getFeedback } from "../../services/getFeedbackService.js";
 import { chooseWord } from "../../services/chooseWordService.js";
 import words from "../../services/wordService.js";
+import highScores from "../../data/highscoreList.js";
+
 const apiRouter = express.Router();
 
 apiRouter.get('/words', (req, res) => {
@@ -10,7 +12,6 @@ apiRouter.get('/words', (req, res) => {
 })
 
 const activeSessions = new Map();
-const highScores = [];
 
 apiRouter.post('/game/start', (req, res) => {
   const { wordLength, allowDuplicateLetters } = req.body;
@@ -185,6 +186,10 @@ apiRouter.post('/highscores', (req, res) => {
     message: "Highscore was saved",
     highscore: highscore
   })
+})
+
+apiRouter.get('/highscores', (req, res) => { 
+  res.json(highScores);
 })
 
 export default apiRouter;
