@@ -1,4 +1,5 @@
 import express from "express";
+import { engine } from "express-handlebars";
 import pagesRouter from "./routes/pages.js";
 import apiRouter from "./routes/apiRoutes.js"
 
