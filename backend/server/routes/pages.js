@@ -12,8 +12,12 @@ pagesRouter.get('/about', (req, res) => {
 })
 
 pagesRouter.get('/highscores', (req, res) => {
+  const sortedHighscores = [...highScores].sort((a, b) => {
+    return a.time - b.time
+  })
+  
   res.render("highscores", {
-    highscores: highScores
+    highscores: sortedHighscores
   });
 })
 
