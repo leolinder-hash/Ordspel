@@ -1,9 +1,22 @@
 <h1>Highscores</h1>
 
-<ul>
-  {{#each highscores}}
-  <li>
-    {{this.rank}}. {{this.playerName}} - guesses: {{this.numberOfGuesses}} - time: {{this.time}}s
-  </li>
-  {{/each}}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Guesses</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each highscores}}
+    <tr>
+      <td>{{this.rank}}</td>
+      <td>{{this.playerName}}</td>
+      <td>{{this.numberOfGuesses}}</td>
+      <td>{{this.time}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
