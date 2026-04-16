@@ -12,10 +12,17 @@ pagesRouter.get('/about', (req, res) => {
 })
 
 pagesRouter.get('/highscores', (req, res) => {
-  const sortedHighscores = [...highScores].sort((a, b) => {
-    return a.time - b.time
-  })
-  
+  const sortedHighscores = [...highScores]
+    .sort((a, b) => (a.time - b.time))
+    .map((score, index) => {
+      return {
+        ...score,
+        rank: index +1,
+        time: score.time.toFixed(2)
+      }
+    }
+    )
+
   res.render("highscores", {
     highscores: sortedHighscores
   });

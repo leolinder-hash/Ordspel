@@ -78,8 +78,8 @@ apiRouter.post('/game/start', (req, res) => {
     sessionId: gameSession.gameSessionId,
     status: gameSession.status,
     settings: gameSession.settings,
-/*     correctWord: gameSession.correctWord
- */  });
+    correctWord: gameSession.correctWord
+  });
 })
 
 apiRouter.post('/game/guess', (req, res) => {
@@ -190,7 +190,7 @@ apiRouter.post('/highscores', (req, res) => {
 })
 
 apiRouter.get('/highscores', (req, res) => {
-  
+
   res.json(highScores);
 })
 
