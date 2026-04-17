@@ -1,22 +1,24 @@
 <h1>Highscores</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Rank</th>
-      <th>Name</th>
-      <th>Guesses</th>
-      <th>Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each highscores}}
-    <tr>
-      <td>{{this.rank}}</td>
-      <td>{{this.playerName}}</td>
-      <td>{{this.numberOfGuesses}}</td>
-      <td>{{this.time}}</td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="table__wrapper">
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Guesses</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each highscores}}
+      <tr>
+        <td>{{this.rank}}</td>
+        <td>{{this.playerName}}</td>
+        <td>{{this.numberOfGuesses}}</td>
+        <td>{{this.time}} s</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
