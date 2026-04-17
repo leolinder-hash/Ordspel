@@ -2,7 +2,7 @@ import express from "express";
 import { getFeedback } from "../../services/getFeedbackService.js";
 import { chooseWord } from "../../services/chooseWordService.js";
 import words from "../../services/wordService.js";
-import highScores from "../../data/highscoreList.js";
+import Highscore from "../models/Highscore.js"
 
 const apiRouter = express.Router();
 
@@ -141,7 +141,7 @@ apiRouter.post('/game/guess', (req, res) => {
   })
 })
 
-apiRouter.post('/highscores', (req, res) => {
+apiRouter.post('/highscores', async (req, res) => {
   const { playerName, sessionId } = req.body;
   const gameSession = activeSessions.get(sessionId);
 
@@ -179,9 +179,9 @@ apiRouter.post('/highscores', (req, res) => {
     date: new Date(),
   }
 
-  gameSession.resultSubmitted = true;
+  await Highscore.create(highscore);
 
-  highScores.push(highscore);
+  gameSession.resultSubmitted = true;
 
   res.status(201).json({
     message: "Highscore was saved",
