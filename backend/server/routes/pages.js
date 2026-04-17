@@ -8,7 +8,7 @@ pagesRouter.get('/', (req, res) => {
 })
 
 pagesRouter.get('/about', (req, res) => {
-  res.send("This is the about page")
+  res.render("about");
 })
 
 pagesRouter.get('/highscores', async (req, res) => {

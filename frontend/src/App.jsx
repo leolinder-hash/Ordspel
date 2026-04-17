@@ -161,10 +161,16 @@ function App() {
       >
         <Button
           buttonText="Highscores"
+          onClick={() => {
+            window.location.href = "http://localhost:5080/highscores"
+          }}
         />
 
         <Button
           buttonText="About us"
+          onClick={() => {
+            window.location.href = "http://localhost:5080/about"
+          }}
         />
       </div>
 
