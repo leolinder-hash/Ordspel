@@ -3,10 +3,10 @@ import Highscore from "../models/Highscore.js"
 
 const pagesRouter = express.Router();
 
-pagesRouter.get('/', (req, res) => {
+/* pagesRouter.get('/', (req, res) => {
   res.send("This is the start page")
 })
-
+ */
 pagesRouter.get('/about', (req, res) => {
   res.render("about");
 })
