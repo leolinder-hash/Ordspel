@@ -73,7 +73,6 @@ apiRouter.post('/game/start', (req, res) => {
     sessionId: gameSession.gameSessionId,
     status: gameSession.status,
     settings: gameSession.settings,
-    correctWord: gameSession.correctWord
   });
 })
 

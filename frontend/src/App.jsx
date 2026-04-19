@@ -138,10 +138,6 @@ function App() {
 
     setPlayerName("");
     setScoreSaved(true);
-
-    setTimeout(() => {
-      setScoreSaved(false);
-    }, 3000);
   }
 
   function gameReset() {
@@ -151,6 +147,7 @@ function App() {
     setGuessedWords([]);
     setGuess("");
     setPlayerName("");
+    setScoreSaved(false);
   }
 
   return (
