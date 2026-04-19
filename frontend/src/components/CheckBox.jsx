@@ -1,8 +1,7 @@
 import './CheckBox.css'
 
 export function CheckBox({ isChecked, setIsChecked }) {
-  //Måste kolla state så att vi kan uppdatera chooseWord funktion
-  //Alltså skicka true/false
+  
   return (
     <div
       className='checkbox__input'

@@ -5,7 +5,10 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+//Create absolute path to words.txt so it can be found regardless of where server starts
 const filePath = path.join(__dirname, "../data/words.txt");
+
+//Read words file once and convert it into an array of words
 const data = fs.readFileSync(filePath, "utf-8");
 
 const words = data.split('\n').

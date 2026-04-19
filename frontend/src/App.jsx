@@ -6,8 +6,6 @@ import { CheckBox } from './components/CheckBox';
 import { HighscoreForm } from './components/HighscoreForm';
 import './App.css'
 
-
-
 function App() {
   const [wordLength, setWordLength] = useState("5");
   const [isChecked, setIsChecked] = useState(false);
@@ -19,6 +17,7 @@ function App() {
   const [playerName, setPlayerName] = useState("");
   const [playerStats, setPlayerStats] = useState([]);
   const [sessionId, setSessionId] = useState(null);
+  const [scoreSaved, setScoreSaved] = useState(false);
 
 
   async function handleSubmitGuess() {
@@ -129,9 +128,6 @@ function App() {
 
     const data = await response.json();
 
-
-    console.log(data);
-
     setPlayerStats(prev => [
       ...prev,
       {
@@ -141,6 +137,11 @@ function App() {
     ])
 
     setPlayerName("");
+    setScoreSaved(true);
+
+    setTimeout(() => {
+      setScoreSaved(false);
+    }, 3000);
   }
 
   function gameReset() {
@@ -180,6 +181,7 @@ function App() {
         guessedWords={guessedWords}
         wordLength={wordLength}
         guess={guess}
+        gameStarted={gameStarted}
       />
 
       {!gameStarted && (
@@ -232,6 +234,7 @@ function App() {
           classNameButton="play__button"
           playerName={playerName}
           onChange={handlePlayerName}
+          scoreSaved={scoreSaved}
 
           onSubmit={handleSubmitStats}
           onPlayAgain={gameReset}

@@ -1,8 +1,7 @@
 import './GameBoard.css'
 
-export function GameBoard({ guessedWords, wordLength, guess }) {
-  //Måste nog även här ha state för att uppdatera UI, rätt ord, fel ord, misplaced
-  //Alltså koppla till getFeedback
+export function GameBoard({ guessedWords, wordLength, guess, gameStarted }) {
+
   const numberOfLetters = Number(wordLength) || 5;
 
 
@@ -12,9 +11,9 @@ export function GameBoard({ guessedWords, wordLength, guess }) {
     >
       {[...Array(6)]
         .map((_, rowIndex) => {
-          const isActive = rowIndex === guessedWords.length;
+          const isActive = gameStarted && rowIndex === guessedWords.length;
           const isLocked = rowIndex < guessedWords.length;
-          const isFuture = rowIndex > guessedWords.length;
+          const isFuture = !gameStarted || rowIndex > guessedWords.length;
           const guessedWord = guessedWords[rowIndex];
           const rowFeedback = guessedWord?.letterFeedback || [];
           const word = isActive ? (guess || "") : (guessedWord?.guess || "");
@@ -56,8 +55,6 @@ export function GameBoard({ guessedWords, wordLength, guess }) {
           );
         })
       }
-
     </div>
-
   );
 }

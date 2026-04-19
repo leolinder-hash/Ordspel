@@ -13,7 +13,8 @@ export function HighscoreForm({
   playerName,
   onSubmit,
   onChange,
-  onPlayAgain
+  onPlayAgain,
+  scoreSaved
 }) {
   return (
     <div className='game__won'>
@@ -31,6 +32,9 @@ export function HighscoreForm({
           onClick={onSubmit}
         />
       </div>
+
+      {scoreSaved && <p>Your score was saved!</p>}
+
       <Button
         buttonText={buttonText2}
         className={classNameButton}

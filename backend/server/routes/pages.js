@@ -3,19 +3,14 @@ import Highscore from "../models/Highscore.js"
 
 const pagesRouter = express.Router();
 
-/* pagesRouter.get('/', (req, res) => {
-  res.send("This is the start page")
-})
- */
 pagesRouter.get('/about', (req, res) => {
   res.render("about");
 })
 
+//Fetch highscored from DB, sorting them by time and adding ranking for SSR page
 pagesRouter.get('/highscores', async (req, res) => {
 
   const scores = await Highscore.find().sort({ time: 1 }).lean();
-
-  console.log("scores from db", scores);
 
   const highscores = scores.map((score, index) => {
     return {

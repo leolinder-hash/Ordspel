@@ -6,11 +6,6 @@ import Highscore from "../models/Highscore.js"
 
 const apiRouter = express.Router();
 
-apiRouter.get('/words', (req, res) => {
-  console.log("det fungerar!")
-  res.json(["word1", "word2"]);
-})
-
 const activeSessions = new Map();
 
 apiRouter.post('/game/start', (req, res) => {
@@ -187,11 +182,6 @@ apiRouter.post('/highscores', async (req, res) => {
     message: "Highscore was saved",
     highscore: highscore
   })
-})
-
-apiRouter.get('/highscores', (req, res) => {
-
-  res.json(highScores);
 })
 
 export default apiRouter;
