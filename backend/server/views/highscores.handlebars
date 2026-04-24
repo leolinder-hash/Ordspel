@@ -1,24 +1,55 @@
-<h1>Highscores</h1>
+<div class="highscores-container">
 
-<div class="table__wrapper">
-  <table>
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Name</th>
-        <th>Guesses</th>
-        <th>Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each highscores}}
-      <tr>
-        <td>{{this.rank}}</td>
-        <td>{{this.playerName}}</td>
-        <td>{{this.numberOfGuesses}}</td>
-        <td>{{this.time}} s</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  <h1>Highscores</h1>
+
+  <form class="filter-form " action="/highscores" method="GET">
+    <div class="filter-fields">
+      <label>Word length:
+        <select name="wordLength">
+          <option value="">All</option>
+          <option value="3">3 letters</option>
+          <option value="4">4 letters</option>
+          <option value="5">5 letters</option>
+          <option value="6">6 letters</option>
+          <option value="7">7 letters</option>
+          <option value="8">8 letters</option>
+          <option value="9">9 letters</option>
+          <option value="10">10 letters</option>
+        </select>
+      </label>
+
+      <label>Duplicate letters:
+        <select name="allowDuplicateLetters">
+          <option value="">All</option>
+          <option value="true">Allowed</option>
+          <option value="false">Not allowed</option>
+        </select>
+      </label>
+    </div>
+
+    <button type="submit">Filter</button>
+  </form>
+
+  <div class="table__wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Guesses</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each highscores}}
+        <tr>
+          <td>{{this.rank}}</td>
+          <td>{{this.playerName}}</td>
+          <td>{{this.numberOfGuesses}}</td>
+          <td>{{this.time}} s</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>

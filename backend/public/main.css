@@ -78,7 +78,7 @@ tbody tr:nth-child(3) {
 
 /* ABOUT STYLING */
 
-.about__container{
+.about__container {
   max-width: 700px;
   margin: 0 auto;
   padding: 2rem;
@@ -111,5 +111,52 @@ tbody tr:nth-child(3) {
   margin-bottom: 0.7rem;
 }
 
+/* HIGHSCORE FILTER STYLING */
 
+.highscores-container {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: center;
+}
 
+.filter-form {
+  display: flex;
+  gap: 1rem;
+  align-items: end;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto 2rem auto;
+
+}
+
+.filter-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-weight: bold;
+}
+
+.filter-fields {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-end;
+}
+
+.filter-form select,
+.filter-form button {
+  min-height: 2rem;
+  font-size: 1rem;
+  padding: 0.3rem;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+}
+
+.filter-form button {
+  cursor: pointer;
+  width: 3.5rem;
+}
+
+.filter-form button:hover {
+  background-color: #dad9d9
+}

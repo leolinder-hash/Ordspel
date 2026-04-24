@@ -25,8 +25,6 @@ pagesRouter.get('/highscores', async (req, res) => {
     filter["settings.allowDuplicateLetters"] = parsedAllowDuplicates;
   }
 
-  console.log(filter);
-
   const scores = await Highscore.find(filter).sort({ time: 1 }).lean();
 
   const highscores = scores.map((score, index) => {
