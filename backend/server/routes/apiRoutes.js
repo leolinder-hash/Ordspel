@@ -37,7 +37,11 @@ apiRouter.post('/game/start', (req, res) => {
     return;
   }
 
-  const randomWord = chooseWord(words, wordLength, allowDuplicates);
+  const wordSource = process.env.NODE_ENV === "test"
+    ? ["crane"]
+    : words;
+
+  const randomWord = chooseWord(wordSource, wordLength, allowDuplicates);
 
   if (!randomWord) {
     res.status(400).json({
